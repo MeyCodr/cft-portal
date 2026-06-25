@@ -7,9 +7,9 @@ import dotenv from 'dotenv'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// .env.local takes priority over .env (local dev secrets)
-dotenv.config({ path: path.join(__dirname, '.env.local') })
+// .env is the primary config; .env.local overrides only what's explicitly set
 dotenv.config({ path: path.join(__dirname, '.env') })
+dotenv.config({ path: path.join(__dirname, '.env.local'), override: true })
 
 const app = express()
 app.use(cors({
