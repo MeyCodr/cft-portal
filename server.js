@@ -21,7 +21,10 @@ app.use(express.json())
 const DIST = path.join(__dirname, 'dist')
 app.use('/phncft', express.static(DIST))
 app.get('/phncft', (_req, res) => res.sendFile(path.join(DIST, 'index.html')))
-app.get('/phncft/*', (_req, res) => res.sendFile(path.join(DIST, 'index.html')))
+app.get('/phncft/*', (req, res, next) => {
+  if (req.path.startsWith('/phncft/api')) return next()  // let API routes handle it
+  res.sendFile(path.join(DIST, 'index.html'))
+})
 
 // ── Config ────────────────────────────────────────────────────────────────────
 const GSHEET_CSV_URL       = process.env.GSHEET_CSV_URL
