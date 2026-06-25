@@ -8,7 +8,7 @@ export default function App() {
   const intervalRef = useRef(null)
 
   const fetchStaff = async (empNo) => {
-    const res = await fetch(`/api/staff/${encodeURIComponent(empNo)}`)
+    const res = await fetch(`/phncft/api/staff/${encodeURIComponent(empNo)}`)
     if (res.ok) setStaffData(await res.json())
   }
 
@@ -16,7 +16,7 @@ export default function App() {
   useEffect(() => {
     const savedEmpNo = sessionStorage.getItem('cft_empNo')
     if (savedEmpNo) {
-      fetch(`/api/staff/${encodeURIComponent(savedEmpNo)}`)
+      fetch(`/phncft/api/staff/${encodeURIComponent(savedEmpNo)}`)
         .then(r => r.ok ? r.json() : null)
         .then(data => {
           if (data) { setStaffData(data); setPage('dashboard') }

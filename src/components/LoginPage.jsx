@@ -11,7 +11,7 @@ export default function LoginPage({ onLogin }) {
     setError('')
     setLoading(true)
     try {
-      const res = await fetch(`/api/staff/${encodeURIComponent(val)}`)
+      const res = await fetch(`/phncft/api/staff/${encodeURIComponent(val)}`)
       const json = await res.json()
       if (!res.ok) throw new Error(json.error || 'HTTP ' + res.status)
       onLogin(json)

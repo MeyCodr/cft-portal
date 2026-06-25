@@ -254,7 +254,7 @@ function startBackgroundRefresh() {
 }
 
 // ── Routes ────────────────────────────────────────────────────────────────────
-app.get('/api/staff/:empNo', async (req, res) => {
+app.get('/phncft/api/staff/:empNo', async (req, res) => {
   try {
     const empNo = req.params.empNo.toUpperCase().trim()
     const data  = await getData()
@@ -268,7 +268,7 @@ app.get('/api/staff/:empNo', async (req, res) => {
 })
 
 // Force immediate reload
-app.post('/api/reload', async (_req, res) => {
+app.post('/phncft/api/reload', async (_req, res) => {
   try {
     lastModified = null  // force re-download even if file hasn't changed
     await checkAndRefresh()
@@ -279,7 +279,7 @@ app.post('/api/reload', async (_req, res) => {
 })
 
 // Status — shows when data was last loaded and file last modified
-app.get('/api/status', (_req, res) => {
+app.get('/phncft/api/status', (_req, res) => {
   res.json({ lastChecked, lastModified, records: cache?.length ?? 0 })
 })
 

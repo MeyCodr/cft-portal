@@ -23,7 +23,7 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': {
+      '/phncft/api': {
         target: 'http://localhost:3004',
         changeOrigin: true,
       }
