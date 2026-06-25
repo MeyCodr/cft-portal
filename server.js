@@ -1,5 +1,6 @@
 import express from 'express'
 import cors from 'cors'
+import helmet from 'helmet'
 import xlsx from 'xlsx'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -12,6 +13,23 @@ dotenv.config({ path: path.join(__dirname, '.env') })
 dotenv.config({ path: path.join(__dirname, '.env.local'), override: true })
 
 const app = express()
+
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc:  ["'self'"],
+      scriptSrc:   ["'self'"],
+      styleSrc:    ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+      fontSrc:     ["'self'", 'https://fonts.gstatic.com'],
+      imgSrc:      ["'self'", 'data:'],
+      connectSrc:  ["'self'"],
+      frameSrc:    ["'none'"],
+      objectSrc:   ["'none'"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // allow fonts/images from external CDN
+}))
+
 app.use(cors({
   origin: process.env.ALLOWED_ORIGIN || '*'
 }))
