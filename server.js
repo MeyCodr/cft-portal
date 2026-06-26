@@ -69,14 +69,15 @@ const COL = {
   CFT_GROUP:  2,   // C  Multi-line project titles "1)Title...\n2)Title..."
   TARGET:     3,   // D  Individual target (RM)
   PROJ_START: 4,   // E  Project 1 saving
-  PROJ_END:   30,  // AE Project 27 saving
-  ACTUAL:     31,  // AF Actual saving
-  ACHIEVE:    33,  // AH Achievement % (decimal, e.g. 0.53 = 53%)
-  DESIG:      34,  // AI Designation
-  TEAM:       35,  // AJ Team
-  DIVISION:   36,  // AK Division
-  DEPT:       37,  // AL Department
-  SECTION:    38,  // AM Section
+  PROJ_END:   31,  // AF Project 28 saving
+  ACTUAL:     32,  // AG Actual saving
+  STATUS:     33,  // AH Status (actual − target gap)
+  ACHIEVE:    34,  // AI Achievement % (decimal, e.g. 0.53 = 53%)
+  DESIG:      35,  // AJ Designation
+  TEAM:       36,  // AK Team
+  DIVISION:   37,  // AL Division
+  DEPT:       38,  // AM Department
+  SECTION:    39,  // AN Section_Occ
 }
 
 // ── Parse multi-line project titles from column C ─────────────────────────────
@@ -129,6 +130,7 @@ function buildStaffFromRows(rows) {
       target:         toNum(row[COL.TARGET]),
       projects,
       actualSaving:   toNum(row[COL.ACTUAL]),
+      status:         toNum(row[COL.STATUS]),
       achievementPct: toPct(row[COL.ACHIEVE]),
       designation:    String(row[COL.DESIG]    || '').trim(),
       team:           String(row[COL.TEAM]     || '').trim(),
